@@ -1,13 +1,15 @@
 const errors = require('restify-errors');
-const patientController = require('../app/controllers/PatientController')
+const PatientController  = require('../app/controllers/PatientController')
 
 module.exports = server => {
+
+    const patientController = new PatientController();
 
     // Buscar lista de pacientes
     server.get('/patients', async (req, res, next) => {
         try {
-            const customers = await patientController.getAll();
-            res.send(customers);
+            const patients = await patientController.getAll();
+            res.send(patients);
             next();
         } catch (err) {
             return next(new errors.InvalidContentError(err));
@@ -17,8 +19,8 @@ module.exports = server => {
     // Buscar paciente
     server.get('/patients/:id', async (req, res, next) => {
         try {
-            const customer = await patientController.get(req.params.id);
-            res.send(customer);
+            const patient = await patientController.get(req.params.id);
+            res.send(patient);
             next();
         } catch (err) {
             return next(new errors.ResourceNotFoundError(`Não existe nenhum paciente com o id [${req.params.id}]`));
@@ -35,7 +37,7 @@ module.exports = server => {
 
         try {
             const newPatient = await patientController.create(req.body);
-            res.send(201);
+            res.send(newPatient);
             next();
         }
         catch (err) {
@@ -53,7 +55,7 @@ module.exports = server => {
 
         try {
             const patient = await patientController.update(req.params.id, req.body);
-            res.send(200);
+            res.send(patient);
             next();
         }
         catch (err) {
@@ -64,8 +66,8 @@ module.exports = server => {
     //Deleta paciente
     server.del('/patients/:id', async (req, res, next) => {
         try {
-            const customer = await patientController.delete(req.params.id);
-            res.send(204);
+            const patient = await patientController.delete(req.params.id);
+            res.send(patient);
             next();
         } catch (err) {
             return next(new errors.ResourceNotFoundError(`Não existe nenhum paciente com o id [${req.params.id}]`));

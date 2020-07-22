@@ -2,73 +2,74 @@ const errors = require('restify-errors');
 const Patient = require('../models/PatientModel')
 
 class PatientService {
+    constructor() { }
 
-    async getAllPatients(req, res) {
+    async getAllPatients() {
         try {
-            const customers = await Patient.find({});
-            res.send(customers);
-            next();
+
+            const patients = await Patient.find();
+            return patients;
         } catch (err) {
-            return next(new errors.InvalidContentError(err));
+            return new errors.InvalidContentError(err);
         }
     }
 
-    async getPatient(req, res) {
+    async getPatient(id) {
         try {
-            const customer = await Patient.findById(req.params.id);
-            res.send(customer);
-            next();
+            const patient = await Patient.findById(id);
+
+            if (!patient)
+                return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
+
+            return patient;
         } catch (err) {
-            return next(new errors.ResourceNotFoundError(`Não existe nenhum paciente com o id [${req.params.id}]`));
+            return new errors.InternalServerError(`Erro para localizar o paciente do [id] ${id}`);
         }
     }
 
-    async createPatient(req, res) {
-
-        const { name, cpf, rg, birthDay, planType, dependentsNumber } = req.body
-
-        const patient = new Patient({
-            name,
-            cpf,
-            rg,
-            birthDay,
-            planType,
-            dependentsNumber
-        })
-
+    async createPatient(body) {
         try {
+            const { name, cpf, rg, birthDay, planType, dependentsNumber } = body
+
+            const patient = new Patient({
+                name,
+                cpf,
+                rg,
+                birthDay,
+                planType,
+                dependentsNumber
+            })
+
             const newPatient = await patient.save();
-            res.send(201);
-            next(newPatient);
+            return newPatient;
         }
         catch (err) {
-            return next(new errors.InternalError(err.message));
+            return new errors.InternalError(err.message);
         }
     }
 
-    async updatePatient(req, res) {
-        //Valida o body
-        if (!req.is('application/json')) {
-            return next(new errors.InvalidContentError("'application/json' esperado"))
-        }
-
+    async updatePatient(id, body) {
         try {
-            const patient = await Patient.findOneAndUpdate({ _id: req.params.id }, req.body);
-            res.send(200);
-            next();
+            await Patient.findOneAndUpdate({ _id: id }, body, { returnOriginal: true });
+            const patient = await Patient.findById(id);
+
+            return patient;
         }
         catch (err) {
-            return next(new errors.ResourceNotFoundError(`Não existe nenhum paciente com o id [${req.params.id}]`));
+            return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
         }
     }
 
-    async deletePatient(req, res) {
+    async deletePatient(id) {
         try {
-            const customer = await Patient.findOneAndRemove({ _id: req.params.id });
-            res.send(204);
-            next();
+            const patient = await Patient.findOneAndRemove({ _id: id });
+
+            if (!patient)
+                return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
+
+            return patient;
         } catch (err) {
-            return next(new errors.ResourceNotFoundError(`Não existe nenhum paciente com o id [${req.params.id}]`));
+            return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
         }
     }
 }
