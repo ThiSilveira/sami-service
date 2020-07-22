@@ -2,7 +2,7 @@ const restify = require('restify')
 const mongoose = require('mongoose')
 const config = require('./config/configs')
 const cors = require('cors')
-const routes = require('./routes/patients')
+const routes = require('./app/routes/router')
 
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser());

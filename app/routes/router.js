@@ -1,5 +1,5 @@
 const errors = require('restify-errors');
-const PatientController = require('../app/controllers/PatientController.js')
+const PatientController = require('../controllers/PatientController.js')
 
 module.exports.register = server => {
 
