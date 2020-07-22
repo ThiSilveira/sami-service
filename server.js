@@ -16,7 +16,6 @@ const db = mongoose.connection;
 db.on('error', (err) => console.log(err))
 
 db.once('open', () => {
-
     require('./routes/patients')(server);
     console.log(`Serviço rodando na porta ${config.PORT}`)
 })
