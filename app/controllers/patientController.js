@@ -1,4 +1,3 @@
-// const path = require('path')
 const PatientService = require('../services/patientService.js');
 
 class PatientController {
