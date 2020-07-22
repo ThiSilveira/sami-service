@@ -26,12 +26,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/patients",
-					"protocol": "http",
+					"raw": "https://sami-service.herokuapp.com/patients",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"sami-service",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"patients"
 					]
@@ -40,7 +41,7 @@
 			"response": []
 		},
 		{
-			"name": "Busca Lista de Paciente",
+			"name": "Buscar Lista de Paciente",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -51,12 +52,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/patients",
-					"protocol": "http",
+					"raw": "https://sami-service.herokuapp.com/patients",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"sami-service",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"patients"
 					]
@@ -65,7 +67,7 @@
 			"response": []
 		},
 		{
-			"name": "Busca Paciente",
+			"name": "Buscar Paciente",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -76,12 +78,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/patients/5f176c0e82bc2f5864d8f2e1",
-					"protocol": "http",
+					"raw": "https://sami-service.herokuapp.com/patients/5f176c0e82bc2f5864d8f2e1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"sami-service",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"patients",
 						"5f176c0e82bc2f5864d8f2e1"
@@ -111,12 +114,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/patients/5f176c0e82bc2f5864d8f2e1",
-					"protocol": "http",
+					"raw": "https://sami-service.herokuapp.com/patients/5f176c0e82bc2f5864d8f2e1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"sami-service",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"patients",
 						"5f176c0e82bc2f5864d8f2e1"
@@ -137,12 +141,13 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/patients/5f185261e7740109ec35d467",
-					"protocol": "http",
+					"raw": "https://sami-service.herokuapp.com/patients/5f185261e7740109ec35d467",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"sami-service",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"patients",
 						"5f185261e7740109ec35d467"

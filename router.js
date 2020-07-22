@@ -29,12 +29,6 @@ module.exports.register = server => {
 
     // Adicionar paciente
     server.post('/patients', async (req, res, next) => {
-
-        //Valida o body
-        if (!req.is('application/json')) {
-            return next(new errors.InvalidContentError("'application/json' esperado"))
-        }
-
         try {
             const newPatient = await patientController.create(req.body);
             res.send(newPatient);
@@ -47,12 +41,6 @@ module.exports.register = server => {
 
     //Atualizar patiente
     server.put('/patients/:id', async (req, res, next) => {
-
-        //Valida o body
-        if (!req.is('application/json')) {
-            return next(new errors.InvalidContentError("'application/json' esperado"))
-        }
-
         try {
             const patient = await patientController.update(req.params.id, req.body);
             res.send(patient);

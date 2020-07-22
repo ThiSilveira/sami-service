@@ -1,4 +1,3 @@
-const path = require('path')
 const errors = require('restify-errors');
 const Patient = require('../models/patientModel.js')
 
