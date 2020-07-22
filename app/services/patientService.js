@@ -4,6 +4,13 @@ const Patient = require('../models/patientModel.js')
 class PatientService {
     constructor() { }
 
+    messageSuccess(message) {
+        return {
+            "code": "Success",
+            "message": message
+        };
+    }
+
     async getAllPatients() {
         try {
 
@@ -40,8 +47,23 @@ class PatientService {
                 dependentsNumber
             })
 
-            const newPatient = await patient.save();
-            return newPatient;
+            // Verifica se o CPF já está cadastrado
+            const patientCPF = await Patient.findOne({ cpf: cpf });
+
+            if (patientCPF) {
+                return new errors.ResourceNotFoundError(`Já existe um paciente com o [CPF] ${cpf}`);
+            }
+
+            // Verifica se o RG já está cadastrado
+            const patientRG = await Patient.findOne({ rg: rg });
+
+            if (patientRG) {
+                return new errors.ResourceNotFoundError(`Já existe um paciente com o [RG] ${rg}`);
+            }
+
+            await patient.save();
+
+            return this.messageSuccess("Paciente criado com sucesso");
         }
         catch (err) {
             return new errors.InternalError(err.message);
@@ -51,9 +73,7 @@ class PatientService {
     async updatePatient(id, body) {
         try {
             await Patient.findOneAndUpdate({ _id: id }, body, { returnOriginal: true });
-            const patient = await Patient.findById(id);
-
-            return patient;
+            return this.messageSuccess("Paciente atualizado com sucesso");
         }
         catch (err) {
             return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
@@ -67,7 +87,8 @@ class PatientService {
             if (!patient)
                 return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
 
-            return patient;
+            return this.messageSuccess("Paciente excluído com sucesso");
+
         } catch (err) {
             return new errors.ResourceNotFoundError(`Não existe nenhum paciente com o [id] ${id}`);
         }
