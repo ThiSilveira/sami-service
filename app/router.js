@@ -1,5 +1,6 @@
+const path = require('path')
 const errors = require('restify-errors');
-const PatientController = require('./controllers/PatientController')
+const PatientController = require(path.join(__dirname, './controllers/PatientController'))
  
 module.exports.register = server => {
 
