@@ -26,8 +26,8 @@
     ../app/documentarion
 
 ### 2.3 Executar as chamadas:
-    GET - Busca Lista de Paciente
-    GET - Busca Paciente
+    GET - Buscar Lista de Paciente
+    GET - Buscar Paciente
     POST - Atualiza Paciente
     PUT - Atualiza Paciente 
     DELETE - Deleta Paciente
