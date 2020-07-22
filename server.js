@@ -7,6 +7,8 @@ const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 server.use(cors())
 
+console.log(config.PORT)
+
 server.listen(config.PORT, () => {
     mongoose.connect(config.DB_URI, { useNewUrlParser: true });
 })

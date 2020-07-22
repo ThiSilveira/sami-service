@@ -3,5 +3,5 @@ module.exports = {
     PORT: process.env.PORT || 3000,
     URL: process.env.APP_URL || "http://localhost:3000",
     DB_URI: process.env.DB_URI ||
-        "mongodb+srv://root:SGw0kylzaIplcKvi@mongodb.jhach.mongodb.net/test"
+        "mongodb+srv://sami:samiproject@mongodb.jhach.mongodb.net/test"
 }
