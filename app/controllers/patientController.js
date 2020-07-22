@@ -1,5 +1,5 @@
 // const path = require('path')
-const PatientService = require(path.join(__dirname, '../services/patientService'))
+const PatientService = require(path.join(__dirname, '../services/patientService.js'))
 
 class PatientController {
     constructor() {
