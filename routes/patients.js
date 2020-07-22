@@ -1,5 +1,6 @@
+const path = require('path');
 const errors = require('restify-errors');
-const PatientController = require('../apps/controllers/PatientController');
+const PatientController = require(path.resolve('app/controllers/PatientController'));
 
 module.exports = server => {
 
